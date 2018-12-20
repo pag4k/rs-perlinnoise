@@ -79,7 +79,7 @@ impl PerlinNoise {
         let n1 = self.dot_gradient(bb, xf - 1_f32, yf - 1_f32);
         let x1 = lerp(n0, n1, u);
 
-        lerp(x0, x1, v)
+        (lerp(x0, x1, v) + 1_f32) / 2_f32
     }
 }
 
