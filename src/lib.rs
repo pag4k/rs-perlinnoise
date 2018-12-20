@@ -56,6 +56,9 @@ impl PerlinNoise {
     }
 
     pub fn perlin(&self, x: f32, y: f32) -> f32 {
+        let x = x - (x as usize / 256) as f32 * 256_f32;
+        let y = y - (y as usize / 256) as f32 * 256_f32;
+
         let xi = x as usize;
         let yi = y as usize;
 
@@ -67,9 +70,9 @@ impl PerlinNoise {
 
         let p = &self.permutation;
         let aa = p[p[xi] + yi];
-        let ab = p[p[xi] + yi + 1];
-        let ba = p[p[xi + 1] + yi];
-        let bb = p[p[xi + 1] + yi + 1];
+        let ab = p[p[xi] + increment(yi)];
+        let ba = p[p[increment(xi)] + yi];
+        let bb = p[p[increment(xi)] + increment(yi)];
 
         let n0 = self.dot_gradient(aa, xf, yf);
         let n1 = self.dot_gradient(ba, xf - 1_f32, yf);
@@ -89,6 +92,10 @@ fn lerp(a: f32, b: f32, w: f32) -> f32 {
 
 fn fade(x: f32) -> f32 {
     x.powi(3) * (6_f32 * x.powi(2) - 15_f32 * x + 10_f32)
+}
+
+fn increment(x: usize) -> usize {
+    (x + 1) % 256
 }
 
 #[cfg(test)]
