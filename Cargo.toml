@@ -1,6 +1,6 @@
 [package]
 name = "rs-perlinnoise"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Pierre-André Gagnon <pagagnon@gmail.com>"]
 edition = "2018"
 
