@@ -1,14 +1,16 @@
-struct PerlinNoise {
-    x: usize,
-    y: usize,
+pub struct PerlinNoise {
     permutation: Vec<usize>,
 }
 
+impl Default for PerlinNoise {
+    fn default() -> Self {
+        PerlinNoise::new()
+    }
+}
+
 impl PerlinNoise {
-    fn new(x: usize, y: usize) -> Self {
+    pub fn new() -> Self {
         PerlinNoise {
-            x: x,
-            y: x,
             permutation: vec![
                 151, 160, 137, 91, 90, 15, 131, 13, 201, 95, 96, 53, 194, 233, 7, 225, 140, 36,
                 103, 30, 69, 142, 8, 99, 37, 240, 21, 10, 23, 190, 6, 148, 247, 120, 234, 75, 0,
@@ -39,7 +41,7 @@ impl PerlinNoise {
         }
     }
 
-    fn perlin(&self, x: f32, y: f32) -> f32 {
+    pub fn perlin(&self, x: f32, y: f32) -> f32 {
         let xi = x as usize;
         let yi = y as usize;
 
